@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  smkzipi:
+    image: cannit/zipi_smktest:latest
+    privileged: true
+    command: 'node app.js'
+    environment:
+      NODE_ENV: 'experiments'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGODB_USERNAME: admin
+      MONGODB_PASSWORD: admin
+      MONGODB_DATABASE: admin
+    ports:
+      - 27017:27017
+    volumes:
+      - ../marnt-task-mongodb/db_volume:/data/db

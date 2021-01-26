@@ -1,0 +1,42 @@
+{
+  "Execution_unit_coverage": {
+       "SERVICES_UP": true
+  },
+  "Service coverage": {
+       "PING_TCP_NETWORK": true
+  },
+  "Service_Protocol_Coverage": {
+       "PING_TCP_NETWORK": true,
+       "LOG_CHECK": true,
+       "ACTIVATE_ENDPOINT": true
+  },
+  "Resources_Up": {
+       "VOLUME_PERMITS": true
+  },
+  "Everything_Up": {
+       "PING_TCP_NETWORK": true,
+       "VOLUME_PERMITS": true,
+       "LOG_CHECK": true,
+       "ACTIVATE_ENDPOINT": true   
+  },
+  "Endpoints_coverage": {
+        "ACTIVATE_ALL_ENDPOINT": true,
+       "LOG_CHECK": true
+  },
+  "Full_Service_Coverage": {
+    "PING_TCP_NETWORK": true,
+    "LOG_CHECK": true,
+    "VOLUME_PERMITS": true,
+    "ACTIVATE_ALL_ENDPOINT": true
+  },
+  "Dependency_coverage": {
+     "CROSS_LOGS": true
+  },
+  "System_coverage": {
+    "PING_TCP_NETWORK": true,
+    "LOG_CHECK": true,
+    "VOLUME_PERMITS": true,
+    "ACTIVATE_ALL_ENDPOINT": true,
+    "CROSS_LOGS": true
+  }
+}

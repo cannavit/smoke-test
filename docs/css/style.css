@@ -1,0 +1,285 @@
+/* 
+1. Position
+2. Box Model
+3. Typography
+4. Visual Effects. 
+5. Others
+*/
+:root {
+    /* colors  */
+    --light-blue:  #173546;
+    --black-blue:  #051723;
+    --gray: #F7F7F7;
+    --orage: #F6A33C;
+    --yellow: #FBC94D;
+    --white: #FFFFFF;
+    --white-blue: #54C8FF;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: 'DM Sans', sans-serif;
+}
+
+header {
+    background-color: var(--light-blue);
+    background-position: center;
+    /* display: flex; */
+    /* width: 100%; */
+    height: 60px;
+    /* max-width: 2000px; */
+}
+
+header img {
+    float: left;
+    width: 176px;
+    height: 65px; 
+    margin-top:6px;
+    margin-left: 10px;
+ }
+
+
+.menu  li {
+  font: small-caption;
+  float: right;
+  display: inline-block;
+  vertical-align: top;;
+}
+
+header ul li a {
+	display: block;
+	padding:22px;
+	color:#fff;
+    text-decoration: none;
+     font-weight: bold; 
+}
+
+header a:hover {
+    /* margin-top 20px; */
+    background: #2b566f;
+    height: 60px;
+
+    /* align-items: center; */
+}
+
+body {
+    background-color: var(--gray)
+}
+
+.main-title-service--container {
+    margin-bottom: 20px;
+    font-size: 2.0rem;
+    margin-top: 20px;
+    color: var(--light-blue);
+    text-align: center;
+    margin-left: 10px;
+}
+
+.main-title-service--container span {
+    color: var(--orage);
+    font-family: 'DM Sans', sans-serif;
+}
+
+.main-container--image {
+    width: 100%;
+    min-width: 320px;
+    height: 40vh;
+    background-image: url('../assets/img/computerImagen2x.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.main-section2-title {
+    font-size: 2.4rem;
+    color: var(--light-blue);
+    text-align: center;
+}
+
+.main-section2-title span {
+    color: var(--orage)
+}
+
+.main-benefits--cards {
+    position: relative;
+    width: 100%;
+    min-width: 320px;
+    height: auto;
+    padding: 20px 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    overflow-x: scroll;
+    scroll-snap-type: proximity;
+    align-items: center;
+    justify-content: center;
+}
+
+.benefits-card--container {
+    width: 90%;
+    min-width: 200px;
+    max-width: 300px;
+    height: 250px;
+    /* margin: 15px auto; */
+    margin: 50px 15px 0;
+    padding: 15px;
+    background-color: var(--white);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0, 0.16);
+}
+
+.benefits--card-title {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--black-blue);
+    text-align: center;
+}
+
+.benefits--card-body {
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.8rem;
+    color: var(--light-blue)
+}
+
+.benefits--card-body span {
+    color: var(--orage);
+    font-weight: bold ;
+    text-align: center;
+}
+
+
+.benefits-detail--card .improve-cicd {
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background-image: url("../assets/icon/cicdIcon.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-left: calc(50% - 30px);
+}
+
+.benefits-detail--card .maint-free {
+    display: inline-block;
+    width: 70px;
+    height: 45px;
+    background-image: url("../assets/icon/manintIcon2.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: calc(50% - 30px);
+}
+
+.benefits-detail--card .quick-test {
+    display: inline-block;
+    width: 70px;
+    height: 45px;
+    background-image: url("../assets/icon/quickTest.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: calc(50% - 30px);
+}
+
+
+.benefits-detail--card .machine-learning {
+    display: inline-block;
+    width: 75px;
+    height: 50px;
+    background-image: url("../assets/icon/machineLearningIcon.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: calc(50% - 30px);
+}
+
+.benefits-detail--card .fast-deployments {
+    display: inline-block;
+    width: 75px;
+    height: 50px;
+    background-image: url("../assets/icon/deployIcon.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: calc(50% - 30px);
+}
+
+.fotter-line-orange {
+    width: 100%;
+    height: 6px;
+    background-color: var(--orage);
+}
+
+.fotter-line-yellow {
+    width: 100%;
+    height: 6px;
+    background-color: var(--yellow);
+}
+
+.footer-reference {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    padding-top: 40px;
+    padding-left: 40px;
+    width: 100%;
+    height: 200px;
+    background-color: #051723;
+    text-align: center;
+}
+
+.footer-reference .github a {
+    margin-top: 4px;
+    font-size: 2.0rem;
+    font-weight: bold;
+    color: var(--white);
+    text-align: justify;
+    text-decoration: none;
+}
+
+.footer-reference .github span { 
+    display: inline-block;
+    width: 41px;
+    height: 40px;
+    background-image: url("../assets/icon/gitHubIcon.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+ 
+.footer-reference .linkedin a {
+    margin-bottom: 4px;
+    font-size: 2.0rem;
+    font-weight: bold;
+    color: var(--white);
+    text-align: justify;
+    text-decoration: none;
+}
+
+.footer-reference .linkedin span { 
+    display: inline-block;
+    width: 45px;
+    height: 41px;
+    background-image: url("../assets/icon/linkendingIcon2.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.footer-reference .openSource a {
+    margin-bottom: 4px;
+    font-size: 2.0rem;
+    font-weight: bold;
+    color: var(--white);
+    text-align: justify;
+    text-decoration: none;
+}
+
+.footer-reference .openSource span { 
+    display: inline-block;
+    width: 45px;
+    height: 41px;
+    background-image: url("../assets/icon/openSourceLogo2.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+ 

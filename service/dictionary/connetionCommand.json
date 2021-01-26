@@ -1,0 +1,19 @@
+{
+  "docker": {
+    "SERVICE": "docker container ls -a --format='{{ json .Names }},'",
+    "PORT": "docker container ls -a --format='{{ json .Ports }},'",
+    "LOG": "docker logs ",
+    "VOLUME": "docker volume ls  --format='{{ json .Name }}'",
+    "MONITORING": "docker stats  --format='{{ json . }},' --no-stream",
+    "STATUS": "docker ps -a --format='{{ json .Status }},'"
+  },
+
+  "kubectl": {
+    "SERVICE": "docker container ls -a --format='{{ json .Names }}'",
+    "PORT": "docker container ls -a --format='{{ json .Ports }}'",
+    "LOG": "docker logs $CONTAINER_NAME",
+    "VOLUME": "docker volume ls  --format='{{ json .Name }}'",
+    "MONITORING": "docker stats  --format='{{ json . }}'"
+  }
+}
+

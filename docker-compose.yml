@@ -1,0 +1,14 @@
+version: '3.0'
+services:
+  smkzipi:
+    build: .
+    container_name: smoke-test
+    image: smkzipi:v1
+    privileged: true
+    command: 'node app.js'
+    environment:
+      NODE_ENV: 'experiments'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+
