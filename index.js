@@ -29,18 +29,4 @@ async function smktest(criterial, config) {
     }
     
     console.log("passTest: ", passTest_result)
-    
-
-
-
-
 }
-
-async function test(criterial, config){   
-
-    let passTest = await smktest(criterial ,config)
-
-}
-
-test(criterial, config)
-

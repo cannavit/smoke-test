@@ -3,7 +3,6 @@ const winston = require("winston");
 const _ = require("lodash");
 const env = process.env.NODE_ENV || "dev";
 let config = require("../config.json");
-global.config = _.merge(config["dev"], config[env]);
 
 const createLogger = function (label) {
   return winston.createLogger({

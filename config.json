@@ -13,8 +13,8 @@
     "MONITORING_TIME": 20,
     
      "SERVICES_NAME": [
-       "edutelling",
-       "edutelling-api"
+       "backend",
+       "frontend"
     ],
    
     "LOG_ALWAWS_SEARCH_IN_LOWER_CASE": true,

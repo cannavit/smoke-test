@@ -16,6 +16,8 @@ const logsOptions = require("../../util/logsOptions");
 const { ShellString } = require("shelljs");
 
 const Table = require("tty-table");
+const getConfigVariable_ENV = require('../../util/getConfigVariable');
+
 
 async function getServices() {
 
@@ -25,6 +27,9 @@ async function getServices() {
   let crossLogsResultsList = [];
   let colorTable = [];
   let passTestTable = true;
+  
+  // const {LOG_NUMBER_OF_LINE} = getConfigVariable_ENV.ConfigCommands();
+  
   let CROSS_LOGS = global.config.CROSS_LOGS;
 
   for (const key in CROSS_LOGS) {

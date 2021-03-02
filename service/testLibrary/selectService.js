@@ -10,11 +10,11 @@ async function getIp() {
   
   
   //! GET CONFIGURATION: 
-  const {MODE_CONNECT} = await getConfigVariable_ENV.ConfigCommands()
+  const {MODE_CONNECT, SERVICE_NAME, SMOKE_TEST_SERVICE_NAME} = await getConfigVariable_ENV.ConfigCommands()
   
   
   if (MODE_CONNECT === 'manual') {
-    servicesaddress = global.config.PING.SERVICES
+    servicesaddress = SERVICE_NAME
   }
   if (MODE_CONNECT === 'docker') {
     
@@ -23,7 +23,7 @@ async function getIp() {
     servicesaddress = servicesaddress.stdout
     
     //! Remove name of smoke-test service. 
-    let deleteWorld = global.config.project.name
+    let deleteWorld = SMOKE_TEST_SERVICE_NAME
     servicesaddress = servicesaddress.replace(deleteWorld,'')
     servicesaddress = servicesaddress.replace('"",','')  
     
@@ -36,7 +36,7 @@ async function getIp() {
     var servicesaddress = shell.exec(connetionCommand.docker.SERVICE, {silent: true})
     
     //! Remove name of smoke-test service.  
-    let deleteWorld = global.config.project.name
+    let deleteWorld = SMOKE_TEST_SERVICE_NAME
     servicesaddress = servicesaddress.replace(deleteWorld,'')
     servicesaddress = servicesaddress.replace('"",','')
     
@@ -55,7 +55,7 @@ async function getPort() {
   const {MODE_CONNECT} = await getConfigVariable_ENV.ConfigCommands()
   
   if (MODE_CONNECT === 'manual') {
-    listPorts = global.config.PING.SERVICES
+    listPorts = SERVICE_NAME
   }
   if (MODE_CONNECT === 'docker') {
     

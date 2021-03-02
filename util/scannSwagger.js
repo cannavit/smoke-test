@@ -23,12 +23,14 @@ function sleep(milliseconds) {
 //! Run shell commands:
 async function getApisFromSwaggerFile() {
   
+  const {ENDPOINT_SWAGGER_PAGE, ENDPOINT_SCANN_SWAGGER_FROM} = await getConfigVariable_ENV.ConfigCommands();
+  
   //! Init swagger page: 
-  var ENDPOINT_SWAGGER_PAGE = global.config.ENDPOINT_SWAGGER_PAGE
+  // var ENDPOINT_SWAGGER_PAGE = global.config.ENDPOINT_SWAGGER_PAGE
   await shell.exec(ENDPOINT_SWAGGER_PAGE, {silent: true})
   sleep(1000)
   
-  var ENDPOINT_SCANN_SWAGGER_FROM = global.config.ENDPOINT_SCANN_SWAGGER_FROM
+  // var ENDPOINT_SCANN_SWAGGER_FROM = global.config.ENDPOINT_SCANN_SWAGGER_FROM
   resultOfExec = await shell.exec(ENDPOINT_SCANN_SWAGGER_FROM, { silent: true });
   
   var swaggerFile = resultOfExec.stdout
@@ -74,7 +76,9 @@ async function getApisFromSwaggerFile() {
 
 async function getTokenServiceFromCurl() {
   
-  var ENDPOINT_GET_TOKEN = global.config.ENDPOINT_GET_TOKEN
+  const {ENDPOINT_GET_TOKEN} = await getConfigVariable_ENV.ConfigCommands();
+
+  // var ENDPOINT_GET_TOKEN = global.config.ENDPOINT_GET_TOKEN
   
   resultOfExec = await shell.exec(ENDPOINT_GET_TOKEN, { silent: true });
   
@@ -210,6 +214,5 @@ async function executeTestCurl() {
   return passTest
 }
 
-//executeTestCurl()
 
 module.exports.executeTestCurl = executeTestCurl;

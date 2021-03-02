@@ -13,16 +13,19 @@ const fs = require("fs-extra");
 const ora = require("ora");
 // Logs opcion:
 
+
 const clear = require("clear");
 const { ConsoleTransportOptions } = require("winston/lib/winston/transports");
-global.config = _.merge(config["dev"], config[env]);
 const getConfigVariable_ENV = require("../../util/getConfigVariable")
 
 
 async function getBugs(logRow, service, results, detectLogBug) {
   var idRow = logRow.split("\n");
   let cont = -1;
-  let lineConfig = idRow.length - global.config.LOG_NUMBER_OF_LINE;
+
+  const {LOG_NUMBER_OF_LINE, LOG_KEYWORD} = getConfigVariable_ENV.ConfigCommands();
+  let lineConfig = idRow.length - LOG_NUMBER_OF_LINE;
+
 
   // logHist = JSON.parse(logHist);
   // read historical
@@ -33,7 +36,7 @@ async function getBugs(logRow, service, results, detectLogBug) {
     // get last number to lines.
     if (cont > lineConfig) {
       // Search error world.
-      keyWorldError = global.config.LOG_KEYWORD;
+      keyWorldError = LOG_KEYWORD;
       for (const key in keyWorldError) {
         bugWorld = idRow[index].search(keyWorldError[key]);
 
@@ -247,10 +250,10 @@ async function searchBugInsideLog(serviceName) {
 async function getLogsCommand() {
 
   //! GET CONFIGURATION: 
-  const {MODE_CONNECT} = await getConfigVariable_ENV.ConfigCommands()
+  const {MODE_CONNECT, SERVICES_NAME} = await getConfigVariable_ENV.ConfigCommands()
 
   if (MODE_CONNECT === "manual") {
-    servicesaddress = global.config.PING.SERVICES;
+    servicesaddress = SERVICES_NAME;
   }
 
   if (MODE_CONNECT === "docker") {

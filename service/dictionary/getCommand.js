@@ -1,18 +1,13 @@
 const _ = require("lodash");
-const log = require("../../util/logger")("editionService");
+const log = require("../../util/logger")("getCommand");
 const config = require("../../config.json");
-const env = process.env.NODE_ENV || "dev";
 const shell = require("shelljs");
 const connectionCommand = require("../../service/dictionary/connetionCommand.json");
-const { Console } = require("winston/lib/winston/transports");
-global.config = _.merge(config["dev"], config[env]);
 
-const getConfigVariable_ENV = require("../../util/getConfigVariable")
+const getConfigVariable_ENV = require("../../util/getConfigVariable");
 
 async function evalCommand(nameToCommand) {
 
-  log.info("EVAL OF COMMAND: ", nameToCommand);
-  
   const {MODE_CONNECT} = await getConfigVariable_ENV.ConfigCommands()
    
   let command = connectionCommand[MODE_CONNECT][nameToCommand];
@@ -41,7 +36,9 @@ async function searchInOutput(nameToCommand, world) {
   
   //! Detect number of list is smoketest service container. 
   //? Remove name of smoke-test service:
-  let smokeTestContainerName = global.config.project.name
+  const {PROJECT_NAME} = getConfigVariable_ENV.ConfigCommands();
+  
+  let smokeTestContainerName = PROJECT_NAME
   let listOutputService = await getListResutls('SERVICE', { silent: true });
   let serviceSmokeTestIdList
   let count = -1 

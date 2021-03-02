@@ -11,7 +11,7 @@ async function status(config=undefined) {
   let Name  
 
   if (config === undefined) {
-    const { SERVICES_NAME } = await getConfigVariable_ENV.ConfigCommands()
+    const { SERVICES_NAME, SMOKE_TEST_SERVICE_NAME } = await getConfigVariable_ENV.ConfigCommands()
     services = SERVICES_NAME
     const name = await getCommand.getListResutls("SERVICE");
     Name = name;
@@ -63,7 +63,7 @@ async function status(config=undefined) {
   } 
   
   //! Remove name of smoke-test service.  
-  let smokeTestContainerName = global.config.project.name
+  let smokeTestContainerName = SMOKE_TEST_SERVICE_NAME
 
   //! Create Table:
   let passTest = false

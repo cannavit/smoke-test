@@ -2,7 +2,7 @@
 const _ = require("lodash");
 const config = require("../../config.json");
 const env = process.env.NODE_ENV || "dev";
-global.config = _.merge(config["dev"], config[env]);
+
 const axios = require("axios");
 // REQUEST:
 const shell = require("shelljs");
@@ -11,14 +11,14 @@ const shell = require("shelljs");
 const ora = require("ora");
 const { forEach } = require("lodash");
 const Table = require("tty-table");
-const getConfigVariable_ENV = require("../../util/getConfigVariable")
+const getConfigVariable_ENV = require("../../util/getConfigVariable");
+
 async function check() {
   
   //! Get the variables:  
-  const { ENDPOINT_HOST } = await getConfigVariable_ENV.ConfigCommands()
+  const { ENDPOINT_HOST, ENDPOINT_LIST } = await getConfigVariable_ENV.ConfigCommands()
   
   // Get parameters
-  let ENDPOINT_LIST = global.config.ENDPOINT_LIST;
   let variable = {};
   let variableSaved = [];
   let statusCode = 0;

@@ -1,0 +1,63 @@
+2021-03-01T14:04:05.325Z [[33mwarn[39m] editionService [33m USE SERVICES NAME OF CONFIG.JSON[39m
+2021-03-01T14:04:10.724Z [[32minfo[39m] editionService [32mWAIT_TIME_SECONDS: [39m
+2021-03-01T14:05:13.841Z [[33mwarn[39m] editionService [33m USE SERVICES NAME OF CONFIG.JSON[39m
+2021-03-01T14:05:13.850Z [[32minfo[39m] editionService [32mWAIT_TIME_SECONDS: [39m
+2021-03-01T14:05:21.980Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: database |[39m
+2021-03-01T14:05:21.981Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 1 | HOST: undefined | TIME: 0[39m
+2021-03-01T14:05:24.492Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: backend |[39m
+2021-03-01T14:05:24.495Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 2 | HOST: undefined | TIME: 8.137[39m
+2021-03-01T14:08:08.543Z [[33mwarn[39m] editionService [33m USE SERVICES NAME OF CONFIG.JSON[39m
+2021-03-01T14:08:08.552Z [[32minfo[39m] editionService [32mWAIT_TIME_SECONDS: [39m
+2021-03-01T14:08:08.659Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: database |[39m
+2021-03-01T14:08:08.659Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 1 | HOST: undefined | TIME: 0[39m
+2021-03-01T14:08:09.750Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: backend |[39m
+2021-03-01T14:08:09.750Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 2 | HOST: undefined | TIME: 0.113[39m
+2021-03-01T14:10:06.740Z [[33mwarn[39m] editionService [33m USE SERVICES NAME OF CONFIG.JSON[39m
+2021-03-01T14:10:06.745Z [[32minfo[39m] editionService [32mWAIT_TIME_SECONDS: [39m
+2021-03-01T14:10:06.894Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: database |[39m
+2021-03-01T14:10:06.894Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 1 | HOST: undefined | TIME: 0[39m
+2021-03-01T14:10:08.019Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: backend |[39m
+2021-03-01T14:10:08.020Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 2 | HOST: undefined | TIME: 0.152[39m
+2021-03-01T14:10:09.548Z [[31merror[39m] scannSwagger [31mNot is possible get token[39m
+2021-03-01T14:12:05.875Z [[33mwarn[39m] editionService [33m USE SERVICES NAME OF CONFIG.JSON[39m
+2021-03-01T14:12:05.884Z [[32minfo[39m] editionService [32mWAIT_TIME_SECONDS: [39m
+2021-03-01T14:12:05.981Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: database |[39m
+2021-03-01T14:12:05.981Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 1 | HOST: undefined | TIME: 0[39m
+2021-03-01T14:12:07.058Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: backend |[39m
+2021-03-01T14:12:07.059Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 2 | HOST: undefined | TIME: 0.103[39m
+2021-03-01T14:12:08.799Z [[31merror[39m] scannSwagger [31mNot is possible get token[39m
+2021-03-01T14:13:42.581Z [[33mwarn[39m] editionService [33m USE SERVICES NAME OF CONFIG.JSON[39m
+2021-03-01T14:13:42.593Z [[32minfo[39m] editionService [32mWAIT_TIME_SECONDS: [39m
+2021-03-01T14:14:22.258Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: database |[39m
+2021-03-01T14:14:22.260Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 1 | HOST: undefined | TIME: 0[39m
+2021-03-01T14:14:24.211Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: backend |[39m
+2021-03-01T14:14:24.212Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 2 | HOST: undefined | TIME: 39.675[39m
+2021-03-01T14:15:12.850Z [[31merror[39m] scannSwagger [31mNot is possible get token[39m
+2021-03-01T14:16:18.874Z [[33mwarn[39m] editionService [33m USE SERVICES NAME OF CONFIG.JSON[39m
+2021-03-01T14:16:18.887Z [[32minfo[39m] editionService [32mWAIT_TIME_SECONDS: [39m
+2021-03-01T14:16:19.515Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: database |[39m
+2021-03-01T14:16:19.517Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 1 | HOST: undefined | TIME: 0[39m
+2021-03-01T14:16:21.126Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: backend |[39m
+2021-03-01T14:16:21.129Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 2 | HOST: undefined | TIME: 0.64[39m
+2021-03-01T14:16:40.183Z [[31merror[39m] scannSwagger [31mNot is possible get token[39m
+2021-03-01T14:18:32.785Z [[33mwarn[39m] editionService [33m USE SERVICES NAME OF CONFIG.JSON[39m
+2021-03-01T14:18:32.797Z [[32minfo[39m] editionService [32mWAIT_TIME_SECONDS: [39m
+2021-03-01T14:18:33.288Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: database |[39m
+2021-03-01T14:18:33.290Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 1 | HOST: undefined | TIME: 0[39m
+2021-03-01T14:18:34.772Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: backend |[39m
+2021-03-01T14:18:34.775Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 2 | HOST: undefined | TIME: 0.502[39m
+2021-03-01T14:19:05.275Z [[31merror[39m] scannSwagger [31mNot is possible get token[39m
+2021-03-01T14:44:41.921Z [[33mwarn[39m] editionService [33m USE SERVICES NAME OF CONFIG.JSON[39m
+2021-03-01T14:44:41.936Z [[32minfo[39m] editionService [32mWAIT_TIME_SECONDS: [39m
+2021-03-01T14:44:42.072Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: database |[39m
+2021-03-01T14:44:42.072Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 1 | HOST: undefined | TIME: 0[39m
+2021-03-01T14:44:43.194Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: backend |[39m
+2021-03-01T14:44:43.194Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 2 | HOST: undefined | TIME: 0.148[39m
+2021-03-01T14:44:45.108Z [[31merror[39m] scannSwagger [31mNot is possible get token[39m
+2021-03-01T14:46:10.416Z [[33mwarn[39m] editionService [33m USE SERVICES NAME OF CONFIG.JSON[39m
+2021-03-01T14:46:10.426Z [[32minfo[39m] editionService [32mWAIT_TIME_SECONDS: [39m
+2021-03-01T14:46:10.601Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: database |[39m
+2021-03-01T14:46:10.601Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 1 | HOST: undefined | TIME: 0[39m
+2021-03-01T14:46:11.698Z [[33mwarn[39m] editionService [33mPING: false | TRY NO: 1 | HOST: backend |[39m
+2021-03-01T14:46:11.698Z [[33mwarn[39m] editionService [33mSERVICE:undefined| PING: false | TRY NO: 2 | HOST: undefined | TIME: 0.182[39m
+2021-03-01T14:46:13.506Z [[31merror[39m] scannSwagger [31mNot is possible get token[39m

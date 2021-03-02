@@ -1,14 +1,8 @@
 let selectTest     = require("../dictionary/testByCriteria.json");
 const _            = require("lodash");
-const env          = process.env.NODE_ENV || "dev";
-const config       = require("../../config.json");
-global.config      = _.merge(config["dev"], config[env]);
-const testCases    = global.config.SMOKE_TEST_CRITERIA;
 const isNumber     = require('is-number');
 
-// RUN CASES
-
-
+// RUN CASES:
 const tcp          = require("./ping");
 const checkLogs    = require("./checkLogs");
 const serviceUp    = require("./servicesUp");
@@ -19,7 +13,6 @@ const endpoint     = require("./endpoint");
 const crossLogs    = require("./crossLogs");
 
 // LOGS
-
 const log          = require("../../util/logger");
 const Table        = require("tty-table");
 var colors         = require('colors');
@@ -59,10 +52,16 @@ async function readdirChronoSorted(dirpath, order) {
 
 async function getNameForGenerateLog(pathControl, monitoringName , serachWorld, nameToFileForCreate) {
 
-  CLEAN_LOGS_REPORTS_NUMBER = global.config.CLEAN_LOGS_REPORTS_NUMBER || 4
+  const {CLEAN_LOGS_REPORTS_NUMBER} = getConfigVariable_ENV.ConfigCommands();
+  
   let directoryPath = await readdirChronoSorted(pathControl, -1) 
   let count = 0
+
+
+  const { SMOKE_TEST_CRITERIA } = await getConfigVariable_ENV.ConfigCommands();
   
+  console.log(" SELECT CRITERIAL :", SMOKE_TEST_CRITERIA)
+
   for (const key in directoryPath) {
     let fileLog = directoryPath[key]
     if (fileLog.includes(serachWorld)){
@@ -103,7 +102,7 @@ async function smktests() {
 
   //! LOAD CONFIG PARAMS.
 
-  const { RETRIES_NUMBER } = await getConfigVariable_ENV.ConfigCommands()
+  const { RETRIES_NUMBER, SMOKE_TEST_CRITERIA } = await getConfigVariable_ENV.ConfigCommands()
 
   let dataBeforeToStart = new Date().toISOString() //* Init time of test. 
   
@@ -144,7 +143,6 @@ async function smktests() {
     console.log(colors.bgGreen('EntryPoint Families Execution Test :'));
 
     //! Add data:
-    
     let ping_tcp_success            = 'DISABLED'
     let log_check_success           = 'DISABLED'
     let service_up_success          = 'DISABLED'
@@ -153,21 +151,19 @@ async function smktests() {
     let active_all_endPoints        = 'DISABLED'
 
     //! Start test.
-    if ((selectTest[testCases].PING_TCP_NETWORK || false)) {
+    if ((selectTest[SMOKE_TEST_CRITERIA].PING_TCP_NETWORK || false)) {
         let results = await tcp.checkNetwork();
         ping_tcp_success = results.successPing
     }
 
     //! Test name: SERVICES_UP 
-    if ((selectTest[testCases].SERVICES_UP || false)) {
+    if ((selectTest[SMOKE_TEST_CRITERIA].SERVICES_UP || false)) {
       let { servicesDisabled  }  = await serviceUp.status();
-      
-      { servicesDisabled }
       service_up_success = !servicesDisabled.detectWord
     
     }
     //! Test name: ACTIVATE_ENDPOINT
-    if ((selectTest[testCases].ACTIVATE_ENDPOINT || false)) {
+    if ((selectTest[SMOKE_TEST_CRITERIA].ACTIVATE_ENDPOINT || false)) {
       passTestEndpoint =  await endpoint.check();
       endpoint_connection_success = passTestEndpoint
     }
@@ -177,23 +173,24 @@ async function smktests() {
     //? ---------------------------------------------------------------------------------------------
     //! Apply criterial CROSS_LOGS: Test ...
     //? ---------------------------------------------------------------------------------------------
-    if ((selectTest[testCases].CROSS_LOGS || false)) {
+    if ((selectTest[SMOKE_TEST_CRITERIA].CROSS_LOGS || false)) {
       let passCrossLogsTest = await crossLogs.getServices();
       cross_logs_success = passCrossLogsTest
     }
     
+   
     
     //? ---------------------------------------------------------------------------------------------
     //! Apply criterial ACTIVATE_ALL_ENDPOINT: Test ...
     //? ---------------------------------------------------------------------------------------------
-    if ((selectTest[testCases].ACTIVATE_ALL_ENDPOINT || false)) { 
+    if ((selectTest[SMOKE_TEST_CRITERIA].ACTIVATE_ALL_ENDPOINT || false)) { 
       active_all_endPoints = await scannSwagger.executeTestCurl()
     }
       
     //? ---------------------------------------------------------------------------------------------
     //! Apply criterial LOG_CHECK: Test ...
     //? ---------------------------------------------------------------------------------------------
-    if ((selectTest[testCases].LOG_CHECK || false)) {
+    if ((selectTest[SMOKE_TEST_CRITERIA].LOG_CHECK || false)) {
       // Plot init test...
       let passTestLogCheck = await checkLogs.searchLogsErr(dataBeforeToStart)
       log_check_success = passTestLogCheck
@@ -242,7 +239,7 @@ async function smktests() {
     forked.on('message', (msg) => {
       
         msg.smokeTestResults = {
-              criterial:  global.config.SMOKE_TEST_CRITERIA,
+              criterial:  SMOKE_TEST_CRITERIA,
               pingTcp:    ping_tcp_success,
               logCheck:   log_check_success,
               upService:  service_up_success,

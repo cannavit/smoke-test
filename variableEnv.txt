@@ -1,0 +1,11 @@
+export PROJECT_NAME=example2_how_use_criterial && export ZIPI_CONFIGURATION=env_variable && export MODE_CONNECT=docker && export SMOKE_TEST_CRITERIA=System_coverage && export RETRIES_NUMBER=0 && export TO_BREAK_PIPELINE=false && export ENDPOINT_HOST=http://backend:8000 && export SERVICES_NAME="['database','backend']" && export LOGS_ERROR_EXCEPTION="['Watching for file changes with StatReloader']" && export LOG_NUMBER_OF_LINE=5 && export LOG_KEYWORD="['error','TypeError']" &&  export CLEAN_LOGS_REPORTS_NUMBER=4 &&  export WAIT_TIME_SECONDS=10 && export MONITORING_TIME=10 &&  export ENDPOINT_SWAGGER_PAGE="curl -XPOST \
+                          --header 'accept-language:it' \
+                          --header 'Content-Type:application/json' \
+                          'http://localhost:3000/api/v1/api-docs'" && export ENDPOINT_SCANN_SWAGGER_FROM="curl -XPOST \
+                                    -H 'accept-language:it' \  
+                                    -H 'Content-type:application/json' \
+                                    'http://localhost:3000/api/v1/api-docs'" && export ENDPOINT_GET_TOKEN="curl -XPOST \
+                           -H 'accept-language:it' \ 
+                           -H 'Content-type:application/json' \
+                            -d '{"email":"formazione@edutelling.it","password":"Passw0rd"}' \
+                            'http://localhost:3000/api/v1/auth/authentication'"
