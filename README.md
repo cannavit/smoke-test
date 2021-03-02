@@ -1,6 +1,6 @@
-Zipi-SmokeTest: 
+SmokeTest: 
 ====================
-Zipi-SmkTest: Is a service developed to avoid sporadic failures in development environments. Applying Smoke-Test techniques. The service performs verifications of environments composed of micro-services. It is a great alternative to remediate sporadic failures that cause wasted time in later stages of development.
+SmkTest: Is a service developed to avoid sporadic failures in development environments. Applying Smoke-Test techniques. The service performs verifications of environments composed of micro-services. It is a great alternative to remediate sporadic failures that cause wasted time in later stages of development.
 
 Keyworld: Smoke Test, Sporadic failures, automatic, test
 
@@ -12,7 +12,7 @@ Content:
 	* [Run service](#markdown-header-emphasis)
 	* [Run example of smoke-test](#markdown-header-emphasis)
 		* [Case: Pase Test](#markdown-header-emphasis)
-* [Use of Enviroment variable in Zipi-Smk-Service](#markdown-header-emphasis)
+* [Use of Enviroment variable in Smk-Service](#markdown-header-emphasis)
 	* [General settings](#markdown-header-emphasis)
 	* [Criterial settings](#markdown-header-emphasis)
 	
@@ -34,7 +34,7 @@ Content:
 # How use the service with Docker
 
 ## Run service 
-     docker run -d --name=smktest cannit/zipi_smktest:latest
+     docker run -d --name=smktest smktest2021/smktest:latest
 		
 ## Run example of smoke-test
 You can use the following example to understand how it works in service. In this guide you will find two examples, one of a fault environment where the Smoke-Test service detects the problem and makes a report. The other example shows a case where the problem has been solved and the service passes the Smoke-test.
@@ -155,7 +155,7 @@ This example recreates a stability problem in the absence of the database. The s
           - host 
     networks:
       host:
-## Use of Enviroment variable in Zipi-Smk-Service
+## Use of Enviroment variable in SmkTest-Service
 
 The following are the environment variables that can be modified in the service.
 
