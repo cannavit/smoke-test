@@ -3,31 +3,27 @@
     "project": {
       "name": "smoke-test"
     },
-    
     "MODE_CONNECT": "docker",
     "WAIT_TIME_SECONDS": 10,
-    "RETRIES_NUMBER": 0,
+    "RETRIES_NUMBER": 3,
     "TO_BREAK_PIPELINE": true,
-    "SMOKE_TEST_CRITERIA": "Endpoints_coverage",
-    "CLEAN_LOGS_REPORTS_NUMBER": 4,
+    "Execution_unit_coverage": "COMMUNICATION_BTW_SERVICE",
+
     "MONITORING_TIME": 20,
-    
-     "SERVICES_NAME": [
-       "backend",
-       "frontend"
-    ],
-   
+
     "LOG_ALWAWS_SEARCH_IN_LOWER_CASE": true,
     "LOG_NUMBER_OF_LINE": 10,
     "LOG_KEYWORD": ["error", "TypeError", "not yet available"],
     "LOGS_DETECT_CHANGE": true,
-    "LOGS_ERROR_EXCEPTION": ["10-listen-on-ipv6-by-default.sh: error: /etc/nginx/conf.d/default.conf differs from the packaged version", "TypeError: Cannot read property 'count' of undefined"],
+    "LOGS_ERROR_EXCEPTION": [
+      "10-listen-on-ipv6-by-default.sh: error: /etc/nginx/conf.d/default.conf differs from the packaged version",
+      "TypeError: Cannot read property 'count' of undefined"
+    ],
 
-    "ENDPOINT_HOST": "http://localhost:3000",
-    "ENDPOINT_SCANN_SWAGGER_FROM": "curl -XPOST -H \"accept-language: it\" -H \"Content-type: application/json\" 'http://localhost:3000/api/v1/api-docs/swagger-ui-init.js'", 
-    "ENDPOINT_SWAGGER_PAGE": "curl -XPOST -H \"accept-language: it\" -H \"Content-type: application/json\" 'http://localhost:3000/api/v1/api-docs'",
-    "ENDPOINT_GET_TOKEN":  "curl -XPOST -H 'accept-language: it' -H \"Content-type: application/json\" -d '{ \"email\": \"formazione@edutelling.it\", \"password\": \"Passw0rd\" }' 'http://localhost:3000/api/v1/auth/authentication'", 
-     
+    "RM_START_BEFORE_TEST_S_": 15,
+    "RM_WAIT_AFTER_TEST_S_": 15,
+
+    "ENDPOINT_HOST": "http://edutelling-api:3000",
     "ENDPOINT_LIST": [
       {
         "NAME": "GET_TOKEN",
@@ -49,9 +45,146 @@
       {
         "INPUT_SERVICE": "edutelling-api",
         "CHECK_SERVICE": "edutelling-orientdb",
-        "SHELL_EXEC": "curl -XPOST -H 'accept-language: it' -H \"Content-type: application/json\" -d '{ \"email\": \"formazione@edutelling.it\", \"password\": \"Passw0rd\" }' 'http://localhost:3000/api/v1/auth/authentication'"
+        "SHELL_EXEC": "curl -XPOST -H 'accept-language: it' -H \"Content-type: application/json\" -d '{ \"email\": \"formazione@edutelling.it\", \"password\": \"Passw0rd\" }' 'http://edutelling-api:3000/api/v1/auth/authentication'"
+      },
+      {
+        "INPUT_SERVICE": "edutelling-api",
+        "CHECK_SERVICE": "edutelling-orientdb",
+        "SHELL_EXEC": "curl -XPOST -H 'accept-language: it' -H \"Content-type: application/json\" -d '{ \"email\": \"formazione@edutelling.it\", \"password\": \"Passw0rd\" }' 'http://edutelling-api:3000/api/v1/auth/authentication'"
       }
     ]
+  },
+
+  "develop": {
+    "project": {
+      "name": "smoke-test"
+    },
+    "MODE_CONNECT": "docker",
+    "WAIT_TIME_SECONDS": 10,
+    "RETRIES_NUMBER": 3,
+    "TO_BREAK_PIPELINE": true,
+    "Execution_unit_coverage": "COMMUNICATION_BTW_SERVICE",
+
+    "MONITORING_TIME": 20,
+
+    "LOG_ALWAWS_SEARCH_IN_LOWER_CASE": true,
+    "LOG_NUMBER_OF_LINE": 10,
+    "LOG_KEYWORD": ["error", "TypeError", "not yet available"],
+    "LOGS_DETECT_CHANGE": true,
+    "LOGS_ERROR_EXCEPTION": [
+      "10-listen-on-ipv6-by-default.sh: error: /etc/nginx/conf.d/default.conf differs from the packaged version",
+      "TypeError: Cannot read property 'count' of undefined"
+    ],
+
+    "RM_START_BEFORE_TEST_S_": 15,
+    "RM_WAIT_AFTER_TEST_S_": 15,
+
+    "ENDPOINT_HOST": "http://edutelling-api:3000",
+    "ENDPOINT_LIST": [
+      {
+        "NAME": "GET_TOKEN",
+        "AUTHENTICATION": true,
+        "VERB": "POST",
+        "URL": ":ENDPOINT_HOST/api/v1/auth/authentication",
+        "HEADER": {
+          "accept-language": "it",
+          "Content-Type": "application/json"
+        },
+        "BODY": {
+          "email": "formazione@edutelling.it",
+          "password": "Passw0rd"
+        },
+        "SAVE_VARIABLE": ["token"]
+      }
+    ],
+    "CROSS_LOGS": [
+      {
+        "INPUT_SERVICE": "edutelling-api",
+        "CHECK_SERVICE": "edutelling-orientdb",
+        "SHELL_EXEC": "curl -XPOST -H 'accept-language: it' -H \"Content-type: application/json\" -d '{ \"email\": \"formazione@edutelling.it\", \"password\": \"Passw0rd\" }' 'http://edutelling-api:3000/api/v1/auth/authentication'"
+      },
+      {
+        "INPUT_SERVICE": "edutelling-api",
+        "CHECK_SERVICE": "edutelling-orientdb",
+        "SHELL_EXEC": "curl -XPOST -H 'accept-language: it' -H \"Content-type: application/json\" -d '{ \"email\": \"formazione@edutelling.it\", \"password\": \"Passw0rd\" }' 'http://edutelling-api:3000/api/v1/auth/authentication'"
+      }
+    ]
+  },
+  "trust-develop": {
+    "project": {
+      "name": "smoke-test"
+    },
+    "MODE_CONNECT": "docker",
+    "WAIT_TIME_SECONDS": 10,
+    "RETRIES_NUMBER": 3,
+    "TO_BREAK_PIPELINE": true,
+    "Execution_unit_coverage": "System_coverage",
+
+    "MONITORING_TIME": 20,
+
+    "LOG_ALWAWS_SEARCH_IN_LOWER_CASE": true,
+    "LOG_NUMBER_OF_LINE": 10,
+    "LOG_KEYWORD": ["error", "TypeError", "not yet available"],
+    "LOGS_DETECT_CHANGE": true,
+    "LOGS_ERROR_EXCEPTION": [
+      "10-listen-on-ipv6-by-default.sh: error: /etc/nginx/conf.d/default.conf differs from the packaged version",
+      "TypeError: Cannot read property 'count' of undefined"
+    ],
+
+    "RM_START_BEFORE_TEST_S_": 15,
+    "RM_WAIT_AFTER_TEST_S_": 15,
+
+    "ENDPOINT_HOST": "http://trust-api:3000",
+    "ENDPOINT_LIST": [
+      {
+        "NAME": "GET_TOKEN",
+        "AUTHENTICATION": true,
+        "VERB": "POST",
+        "URL": ":ENDPOINT_HOST/api/v5/auth/login",
+        "HEADER": {
+          "accept-language": "it",
+          "Content-Type": "application/json"
+        },
+        "BODY": {
+          "email": "support@trusttm.com",
+          "password": "P@ssw0rd"
+        },
+        "SAVE_VARIABLE": ["token"]
+      }
+    ],
+    "CROSS_LOGS": [
+      {
+        "INPUT_SERVICE": "trust-api",
+        "CHECK_SERVICE": "trust-orientdb",
+        "SHELL_EXEC": "curl -XPOST -H 'accept-language: it' -H \"Content-type: application/json\" -d '{ \"username\": \"support@trusttm.com\", \"password\": \"P@ssw0rd\" }' 'http://trust-api:3000/api/v5/auth/login'"
+      },
+      {
+        "INPUT_SERVICE": "trust-api",
+        "CHECK_SERVICE": "trust-orientdb",
+        "SHELL_EXEC": "curl -XPOST -H 'accept-language: it' -H \"Content-type: application/json\" -d '{ \"username\": \"support@trusttm.com\", \"password\": \"P@ssw0rd\" }' 'http://trust-api:3000/api/v5/auth/login'"
+      }
+    ]
+  },
+  "manual": {
+    "project": {
+      "name": "smoke-test"
+    },
+
+    "MODE_CONNECT": "manual",
+    "WAIT_TIME_SECONDS": 10,
+    "RETRIES_NUMBER": 3,
+    "TO_BREAK_PIPELINE": true,
+    "Execution_unit_coverage": "BUILD_INTEGRITY",
+
+    "LOG_ALWAWS_SEARCH_IN_LOWER_CASE": true,
+    "LOG_NUMBER_OF_LINE": 10,
+    "LOG_KEYWORD": ["error", "TypeError"],
+
+    "PING": {
+      "SERVICES": [
+        { "service": "localhost", "ip": "127.0.0.1", "port": "80" },
+        { "service": "googleTest", "ip": "www.google.com", "port": "80" }
+      ]
+    }
   }
-  
 }

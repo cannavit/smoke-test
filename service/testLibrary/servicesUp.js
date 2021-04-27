@@ -1,102 +1,92 @@
 const getCommand = require("../dictionary/getCommand");
-const Table      = require("tty-table");
-const ora        = require("ora");
-const getConfigVariable_ENV = require("../../util/getConfigVariable")
+const Table = require("tty-table");
+const ora = require("ora");
+const getConfigVariable_ENV = require("../../util/getConfigVariable");
 
-async function status(config=undefined) {
-
+async function status(config = undefined) {
   //! Load configuration.
-  let services 
+  let services;
   //! Get service name
-  let Name  
+  let Name;
 
   if (config === undefined) {
-    const { SERVICES_NAME, SMOKE_TEST_SERVICE_NAME } = await getConfigVariable_ENV.ConfigCommands()
-    services = SERVICES_NAME
+    const {
+      SERVICES_NAME,
+      SMOKE_TEST_SERVICE_NAME,
+    } = await getConfigVariable_ENV.ConfigCommands();
+    services = SERVICES_NAME;
     const name = await getCommand.getListResutls("SERVICE");
     Name = name;
   } else {
-    const SERVICES_NAME2 = config.SERVICES_NAME
-    services = SERVICES_NAME2
-    const name2 = SERVICES_NAME2
-    Name = name2
+    const SERVICES_NAME2 = config.SERVICES_NAME;
+    services = SERVICES_NAME2;
+    const name2 = SERVICES_NAME2;
+    Name = name2;
   }
-  
-  let keyWold = 'Exited'
-  //! Get service down
-  let servicesName     = await getCommand.getListResutls("STATUS");
-  let servicesDisabled = await getCommand.searchInOutput("STATUS", keyWold);
-  
-  //!Control is all services exist inside to Container Manager: 
 
-  let lackService     = false
-  let nameLackService = []
+  let keyWold = "Exited";
+  //! Get service down
+  let servicesName = await getCommand.getListResutls("STATUS");
+  let servicesDisabled = await getCommand.searchInOutput("STATUS", keyWold);
+
+  //!Control is all services exist inside to Container Manager:
+
+  let lackService = false;
+  let nameLackService = [];
 
   if (services !== undefined) {
-
     for (const key in services) {
+      let serviceConfigName = services[key];
 
-      let serviceConfigName = services[key]
-
-      if (!Name.includes(serviceConfigName)){
-            lackService = true
-            nameLackService.push(serviceConfigName)
+      if (!Name.includes(serviceConfigName)) {
+        lackService = true;
+        nameLackService.push(serviceConfigName);
       }
-
     }
-
   }
-  
 
   let tableData = [];
   if (lackService) {
     for (const key in nameLackService) {
-      servicesDisabled.detectWord = true
+      servicesDisabled.detectWord = true;
       tableData.push({
         serviceName: nameLackService[key],
         description: "No found service inside to Manager",
-        activeService: "False" 
-      })
-
+        activeService: "False",
+      });
     }
-    
-  } 
-  
-  //! Remove name of smoke-test service.  
-  let smokeTestContainerName = SMOKE_TEST_SERVICE_NAME
+  }
+
+  //! Remove name of smoke-test service.
+  let smokeTestContainerName = "smoke-test";
 
   //! Create Table:
-  let passTest = false
+  let passTest = false;
 
   for (const key in Name) {
-
     let name = Name[key];
     let servicesname = servicesName[key];
-    console.log('keyWold:', keyWold)
+    console.log("keyWold:", keyWold);
     let existKeyWold = servicesname.search(keyWold);
-    let existD
-    
+    let existD;
+
     if (existKeyWold !== -1 && name != smokeTestContainerName) {
       existD = false;
-      passTest = true
+      passTest = true;
     } else {
       existD = true;
       passTest = false;
     }
-    
-    
-    if (name != smokeTestContainerName) {
 
+    if (name != smokeTestContainerName) {
       tableData.push({
         serviceName: name,
         description: servicesname,
         activeService: String(existD),
       });
-      
     }
-    
   }
-  
+
   //! Add spinner.
   let spinner = ora("Check if all services are UP").start();
 
@@ -110,7 +100,12 @@ async function status(config=undefined) {
   if (servicesDisabled.detectWord) {
     let header = [
       { value: "serviceName", width: 25, alias: "Service Name" },
-      { value: "description", width: 40, align: "rigth", alias: "Description service-down" },
+      {
+        value: "description",
+        width: 40,
+        align: "rigth",
+        alias: "Description service-down",
+      },
       {
         alias: "Service Up",
         value: "activeService",
@@ -128,11 +123,10 @@ async function status(config=undefined) {
     ];
     const t3 = Table(header, tableData);
 
-
     console.log(t3.render());
   }
 
-  const dataResult = { "servicesDisabled": servicesDisabled,  "passTest": passTest } 
+  const dataResult = { servicesDisabled: servicesDisabled, passTest: passTest };
 
   return dataResult;
 }
