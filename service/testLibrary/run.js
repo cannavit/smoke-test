@@ -10,7 +10,7 @@ const tc = require("timezonecomplete");
 const scannSwagger = require("../../util/scannSwagger");
 
 const endpoint = require("./endpoint");
-const crossLogs = require("./crossLogs");
+const crossLogs2 = require("./crossLogs");
 
 // LOGS
 const log = require("../../util/logger");
@@ -100,14 +100,13 @@ async function getNameForGenerateLog(
 // Read name of file report.
 const logsOption = require("../../util/logsOptions");
 const { fork } = require("child_process");
+const { ConsoleTransportOptions } = require("winston/lib/winston/transports");
 
 async function smktests() {
   //! LOAD CONFIG PARAMS.
 
-  const {
-    RETRIES_NUMBER,
-    SMOKE_TEST_CRITERIA,
-  } = await getConfigVariable_ENV.ConfigCommands();
+  const { RETRIES_NUMBER, SMOKE_TEST_CRITERIA } =
+    await getConfigVariable_ENV.ConfigCommands();
 
   let dataBeforeToStart = new Date().toISOString(); //* Init time of test.
 
@@ -119,7 +118,7 @@ async function smktests() {
   let searchWorld = "Test";
   let nameToFileForCreate = "_out_monitoring.csv";
 
-  var forked = fork("./util/monitoring");
+  // var forked = fork("./util/monitoring");
 
   let COUNT_TRY_SMOKE_TEST_RUN = 0;
 
@@ -136,12 +135,13 @@ async function smktests() {
 
   //! Init monitoring.js
   console.log(colors.bgGreen("Start Monitoring resources now!"));
-  forked.send({
-    startOfMonitoring: true,
-    nameOfreport: name,
-    nameOfTestLogs: nameOfTestLogs,
-  });
-  fs.writeFileSync("util/stop.tmp", "false");
+  // forked.send({
+  //   startOfMonitoring: true,
+  //   nameOfreport: name,
+  //   nameOfTestLogs: nameOfTestLogs,
+  // });
+
+  // fs.writeFileSync("util/stop.tmp", "false");
 
   //! Wait for the test
 
@@ -162,28 +162,37 @@ async function smktests() {
     console.log(colors.bgGreen("EntryPoint Families Execution Test :"));
 
     //! Add data:
-    let ping_tcp_success = "DISABLED";
-    let log_check_success = "DISABLED";
-    let service_up_success = "DISABLED";
-    let endpoint_connection_success = "DISABLED";
-    let cross_logs_success = "DISABLED";
+    let pingTcp = "DISABLED";
+    let logCheck = "DISABLED";
+    let upService = "DISABLED";
+    let endpoints = "DISABLED";
+    let crossLogs = "DISABLED";
     let active_all_endPoints = "DISABLED";
+
+    //! Test name: ACTIVATE_ENDPOINT
+    console.log("SMOKE_TEST_CRITERIA :", SMOKE_TEST_CRITERIA);
+    console.log("000 ", selectTest[SMOKE_TEST_CRITERIA]);
+    console.log(
+      "----- -- :: ",
+      selectTest[SMOKE_TEST_CRITERIA].ACTIVATE_ENDPOINT
+    );
 
     //! Start test.
     if (selectTest[SMOKE_TEST_CRITERIA].PING_TCP_NETWORK || false) {
       let results = await tcp.checkNetwork();
-      ping_tcp_success = results.successPing;
+      pingTcp = results.successPing;
     }
 
     //! Test name: SERVICES_UP
     if (selectTest[SMOKE_TEST_CRITERIA].SERVICES_UP || false) {
       let { servicesDisabled } = await serviceUp.status();
-      service_up_success = !servicesDisabled.detectWord;
+      upService = !servicesDisabled.detectWord;
     }
-    //! Test name: ACTIVATE_ENDPOINT
+
     if (selectTest[SMOKE_TEST_CRITERIA].ACTIVATE_ENDPOINT || false) {
       passTestEndpoint = await endpoint.check();
-      endpoint_connection_success = passTestEndpoint;
+
+      endpoints = passTestEndpoint;
     }
 
     // TODO add cross logs
@@ -192,8 +201,8 @@ async function smktests() {
     //! Apply criterial CROSS_LOGS: Test ...
     //? ---------------------------------------------------------------------------------------------
     if (selectTest[SMOKE_TEST_CRITERIA].CROSS_LOGS || false) {
-      let passCrossLogsTest = await crossLogs.getServices();
-      cross_logs_success = passCrossLogsTest;
+      let passCrossLogsTest = await crossLogs2.getServices();
+      crossLogs = passCrossLogsTest;
     }
 
     //? ---------------------------------------------------------------------------------------------
@@ -209,11 +218,10 @@ async function smktests() {
     if (selectTest[SMOKE_TEST_CRITERIA].LOG_CHECK || false) {
       // Plot init test...
       let passTestLogCheck = await checkLogs.searchLogsErr(dataBeforeToStart);
-      log_check_success = passTestLogCheck;
+      logCheck = passTestLogCheck;
     }
 
     //? Get duration of Tests.
-
     var end = new tc.nowUtc();
     var duration = end.diff(start);
     duration = duration.seconds();
@@ -221,28 +229,28 @@ async function smktests() {
     //! Repit test in case of fail
     let passTest = false;
 
-    console.log(ping_tcp_success);
-    console.log(log_check_success);
-    console.log(service_up_success);
-    console.log(endpoint_connection_success);
-    console.log(cross_logs_success);
+    console.log(pingTcp);
+    console.log(logCheck);
+    console.log(upService);
+    console.log(endpoints);
+    console.log(crossLogs);
 
     if (
-      (ping_tcp_success || ping_tcp_success === "DISABLED") &&
-      (log_check_success || log_check_success === "DISABLED") &&
-      (service_up_success || service_up_success === "DISABLED") &&
+      (pingTcp || pingTcp === "DISABLED") &&
+      (logCheck || logCheck === "DISABLED") &&
+      (upService || upService === "DISABLED") &&
       (active_all_endPoints || active_all_endPoints === "DISABLED") &&
-      (cross_logs_success || cross_logs_success === "DISABLED")
+      (crossLogs || crossLogs === "DISABLED")
     ) {
       passTest = true;
     }
 
     if (
-      !ping_tcp_success ||
-      !log_check_success ||
-      !service_up_success ||
-      !endpoint_connection_success ||
-      !cross_logs_success ||
+      !pingTcp ||
+      !logCheck ||
+      !upService ||
+      !endpoints ||
+      !crossLogs ||
       !active_all_endPoints
     ) {
       COUNT_TRY_SMOKE_TEST_RUN = COUNT_TRY_SMOKE_TEST_RUN + 1;
@@ -255,46 +263,45 @@ async function smktests() {
       RUN_SMOKE_TEST = false;
     }
 
+    let msg = {};
     //! Get data from monitoring.js
-    forked.on("message", (msg) => {
-      msg.smokeTestResults = {
-        criterial: SMOKE_TEST_CRITERIA,
-        pingTcp: ping_tcp_success,
-        logCheck: log_check_success,
-        upService: service_up_success,
-        endpoints: endpoint_connection_success,
-        crossLogs: cross_logs_success,
-        allEndpoints: active_all_endPoints,
-        testTime: duration,
-        passTest: passTest,
-      };
+    // forked.on("message", (msg) => {
+    msg.smokeTestResults = {
+      criterial: SMOKE_TEST_CRITERIA,
+      pingTcp: pingTcp,
+      logCheck: logCheck,
+      upService: upService,
+      endpoints: endpoints,
+      crossLogs: crossLogs,
+      allEndpoints: active_all_endPoints,
+      testTime: duration,
+      passTest: passTest,
+    };
 
-      let oldDataRow;
+    //   let oldDataRow;
+    try {
+      let rawdata = fs.readFileSync("./logs/TEST/smokeTestResults.json");
+      oldDataRow = JSON.parse(rawdata);
+    } catch (error) {
+      oldDataRow = [];
+    }
 
-      try {
-        let rawdata = fs.readFileSync("./logs/TEST/smokeTestResults.json");
-        oldDataRow = JSON.parse(rawdata);
-      } catch (error) {
-        oldDataRow = [];
-      }
+    oldDataRow.push(msg);
+    let data = JSON.stringify(oldDataRow);
+    fs.writeFileSync("./logs/TEST/smokeTestResults.json", data);
 
-      oldDataRow.push(msg);
-
-      let data = JSON.stringify(oldDataRow);
-
-      fs.writeFileSync("./logs/TEST/smokeTestResults.json", data);
-    });
+    // });
 
     //
   }
 
   // await sleep(5000);
-  fs.writeFileSync("util/stop.tmp", "true");
-  forked.send({
-    startOfMonitoring: false,
-    nameOfreport: name,
-    nameOfTestLogs: nameOfTestLogs,
-  });
+  // fs.writeFileSync("util/stop.tmp", "true");
+  // forked.send({
+  //   startOfMonitoring: false,
+  //   nameOfreport: name,
+  //   nameOfTestLogs: nameOfTestLogs,
+  // });
 
   return PASS_TEST;
 }

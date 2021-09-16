@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "serve": "node app.js",
-    "monitoring": " node monitoring.js",
+    "monitoring": "node util/monitoring.js",
     "start": "npm-run-all --parallel serve monitoring"
   },
   "dependencies": {

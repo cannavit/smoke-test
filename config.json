@@ -7,7 +7,7 @@
     "WAIT_TIME_SECONDS": 10,
     "RETRIES_NUMBER": 3,
     "TO_BREAK_PIPELINE": true,
-    "Execution_unit_coverage": "COMMUNICATION_BTW_SERVICE",
+    "SMOKE_TEST_CRITERIA": "System_coverage",
 
     "MONITORING_TIME": 20,
 
@@ -29,13 +29,13 @@
         "NAME": "GET_TOKEN",
         "AUTHENTICATION": true,
         "VERB": "POST",
-        "URL": ":ENDPOINT_HOST/api/v1/auth/authentication",
+        "URL": ":ENDPOINT_HOST/api/v5/auth/authentication",
         "HEADER": {
           "accept-language": "it",
           "Content-Type": "application/json"
         },
         "BODY": {
-          "email": "formazione@edutelling.it",
+          "email": "support@trusttm.com",
           "password": "Passw0rd"
         },
         "SAVE_VARIABLE": ["token"]
@@ -45,12 +45,12 @@
       {
         "INPUT_SERVICE": "edutelling-api",
         "CHECK_SERVICE": "edutelling-orientdb",
-        "SHELL_EXEC": "curl -XPOST -H 'accept-language: it' -H \"Content-type: application/json\" -d '{ \"email\": \"formazione@edutelling.it\", \"password\": \"Passw0rd\" }' 'http://edutelling-api:3000/api/v1/auth/authentication'"
+        "SHELL_EXEC": "curl -XPOST -H 'accept-language: it' -H \"Content-type: application/json\" -d '{ \"email\": \"support@trusttm.com\", \"password\": \"Passw0rd\" }' 'http://edutelling-api:3000/api/v5/auth/authentication'"
       },
       {
         "INPUT_SERVICE": "edutelling-api",
         "CHECK_SERVICE": "edutelling-orientdb",
-        "SHELL_EXEC": "curl -XPOST -H 'accept-language: it' -H \"Content-type: application/json\" -d '{ \"email\": \"formazione@edutelling.it\", \"password\": \"Passw0rd\" }' 'http://edutelling-api:3000/api/v1/auth/authentication'"
+        "SHELL_EXEC": "curl -XPOST -H 'accept-language: it' -H \"Content-type: application/json\" -d '{ \"email\": \"support@trusttm.com\", \"password\": \"Passw0rd\" }' 'http://edutelling-api:3000/api/v5/auth/authentication'"
       }
     ]
   },
@@ -63,7 +63,7 @@
     "WAIT_TIME_SECONDS": 10,
     "RETRIES_NUMBER": 3,
     "TO_BREAK_PIPELINE": true,
-    "Execution_unit_coverage": "COMMUNICATION_BTW_SERVICE",
+    "SMOKE_TEST_CRITERIA": "System_coverage",
 
     "MONITORING_TIME": 20,
 
@@ -85,13 +85,13 @@
         "NAME": "GET_TOKEN",
         "AUTHENTICATION": true,
         "VERB": "POST",
-        "URL": ":ENDPOINT_HOST/api/v1/auth/authentication",
+        "URL": ":ENDPOINT_HOST/api/v5/auth/authentication",
         "HEADER": {
           "accept-language": "it",
           "Content-Type": "application/json"
         },
         "BODY": {
-          "email": "formazione@edutelling.it",
+          "email": "support@trusttm.com",
           "password": "Passw0rd"
         },
         "SAVE_VARIABLE": ["token"]
@@ -101,12 +101,12 @@
       {
         "INPUT_SERVICE": "edutelling-api",
         "CHECK_SERVICE": "edutelling-orientdb",
-        "SHELL_EXEC": "curl -XPOST -H 'accept-language: it' -H \"Content-type: application/json\" -d '{ \"email\": \"formazione@edutelling.it\", \"password\": \"Passw0rd\" }' 'http://edutelling-api:3000/api/v1/auth/authentication'"
+        "SHELL_EXEC": "curl -XPOST -H 'accept-language: it' -H \"Content-type: application/json\" -d '{ \"email\": \"support@trusttm.com\", \"password\": \"Passw0rd\" }' 'http://trust-api:3000/api/v5/auth/login'"
       },
       {
         "INPUT_SERVICE": "edutelling-api",
         "CHECK_SERVICE": "edutelling-orientdb",
-        "SHELL_EXEC": "curl -XPOST -H 'accept-language: it' -H \"Content-type: application/json\" -d '{ \"email\": \"formazione@edutelling.it\", \"password\": \"Passw0rd\" }' 'http://edutelling-api:3000/api/v1/auth/authentication'"
+        "SHELL_EXEC": "curl -XPOST -H 'accept-language: it' -H \"Content-type: application/json\" -d '{ \"email\": \"support@trusttm.com\", \"password\": \"Passw0rd\" }' 'http://trust-api:3000/api/v5/auth/login'"
       }
     ]
   },
@@ -116,12 +116,19 @@
     },
     "MODE_CONNECT": "docker",
     "WAIT_TIME_SECONDS": 10,
-    "RETRIES_NUMBER": 3,
+    "RETRIES_NUMBER": 0,
     "TO_BREAK_PIPELINE": true,
-    "Execution_unit_coverage": "System_coverage",
-
+    "SMOKE_TEST_CRITERIA": "System_coverage",
+    "SERVICES_NAME": [
+      "trust-api",
+      "trust-postgres",
+      "trust-orientdb",
+      "trust-app",
+      "trust-amqp"
+    ],
     "MONITORING_TIME": 20,
-
+    "ENDPOINT_SCANN_SWAGGER_FROM": "curl -XPOST  -H 'accept-language:it' -H 'Content-type:application/json' 'http://localhost:3000/api/v5/api-docs'",
+    "ENDPOINT_GET_TOKEN": "curl -X POST 'http://localhost:3000/api/v5/auth/login' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{ \"username\": \"support@trusttm.com\", \"password\": \"Passw0rd\" }'",
     "LOG_ALWAWS_SEARCH_IN_LOWER_CASE": true,
     "LOG_NUMBER_OF_LINE": 10,
     "LOG_KEYWORD": ["error", "TypeError", "not yet available"],
@@ -174,7 +181,7 @@
     "WAIT_TIME_SECONDS": 10,
     "RETRIES_NUMBER": 3,
     "TO_BREAK_PIPELINE": true,
-    "Execution_unit_coverage": "BUILD_INTEGRITY",
+    "SMOKE_TEST_CRITERIA": "BUILD_INTEGRITY",
 
     "LOG_ALWAWS_SEARCH_IN_LOWER_CASE": true,
     "LOG_NUMBER_OF_LINE": 10,
