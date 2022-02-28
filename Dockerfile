@@ -6,6 +6,7 @@ RUN apk add curl
 
 WORKDIR /var/local
 
+
 RUN apk update && \
     mkdir -p /usr/src/app
 
